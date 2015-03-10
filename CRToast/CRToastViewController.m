@@ -54,14 +54,14 @@ UIStatusBarStyle statusBarStyle;
     self.view = [[CRToastContainerView alloc] init];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    
+
     if (self.toastView) {
         CGSize notificationSize = CRNotificationViewSizeForOrientation(self.notification.notificationType, self.notification.preferredHeight, toInterfaceOrientation);
         self.toastView.frame = CGRectMake(0, 0, notificationSize.width, notificationSize.height);
     }
 }
-
 
 @end

@@ -14,35 +14,31 @@
  */
 
 typedef NS_OPTIONS(NSInteger, CRToastInteractionType) {
-    CRToastInteractionTypeSwipeUp           = 1 << 0,
-    CRToastInteractionTypeSwipeLeft         = 1 << 1,
-    CRToastInteractionTypeSwipeDown         = 1 << 2,
-    CRToastInteractionTypeSwipeRight        = 1 << 3,
-    CRToastInteractionTypeTapOnce           = 1 << 4,
-    CRToastInteractionTypeTapTwice          = 1 << 5,
-    CRToastInteractionTypeTwoFingerTapOnce  = 1 << 6,
+    CRToastInteractionTypeSwipeUp = 1 << 0,
+    CRToastInteractionTypeSwipeLeft = 1 << 1,
+    CRToastInteractionTypeSwipeDown = 1 << 2,
+    CRToastInteractionTypeSwipeRight = 1 << 3,
+    CRToastInteractionTypeTapOnce = 1 << 4,
+    CRToastInteractionTypeTapTwice = 1 << 5,
+    CRToastInteractionTypeTwoFingerTapOnce = 1 << 6,
     CRToastInteractionTypeTwoFingerTapTwice = 1 << 7,
-    
-    //An interaction responder with a CRToastInteractionTypeSwipe interaction type will fire on all swipe interactions
-    CRToastInteractionTypeSwipe             = (CRToastInteractionTypeSwipeUp    |
-                                               CRToastInteractionTypeSwipeLeft  |
-                                               CRToastInteractionTypeSwipeDown  |
-                                               CRToastInteractionTypeSwipeRight),
-    
-    //An interaction responder with a CRToastInteractionTypeTap interaction type will fire on all tap interactions
-    CRToastInteractionTypeTap               = (CRToastInteractionTypeTapOnce            |
-                                               CRToastInteractionTypeTapTwice           |
-                                               CRToastInteractionTypeTwoFingerTapOnce   |
-                                               CRToastInteractionTypeTwoFingerTapTwice),
-    
-    //An interaction responder with a CRToastInteractionTypeAll interaction type will fire on all swipe and tap interactions
-    CRToastInteractionTypeAll               = (CRToastInteractionTypeSwipe, CRToastInteractionTypeTap)
+
+    // An interaction responder with a CRToastInteractionTypeSwipe interaction type will fire on all swipe interactions
+    CRToastInteractionTypeSwipe = (CRToastInteractionTypeSwipeUp | CRToastInteractionTypeSwipeLeft | CRToastInteractionTypeSwipeDown | CRToastInteractionTypeSwipeRight),
+
+    // An interaction responder with a CRToastInteractionTypeTap interaction type will fire on all tap interactions
+    CRToastInteractionTypeTap = (CRToastInteractionTypeTapOnce | CRToastInteractionTypeTapTwice | CRToastInteractionTypeTwoFingerTapOnce | CRToastInteractionTypeTwoFingerTapTwice),
+
+    // An interaction responder with a CRToastInteractionTypeAll interaction type will fire on all swipe and tap
+    // interactions
+    CRToastInteractionTypeAll = (CRToastInteractionTypeSwipe, CRToastInteractionTypeTap)
 };
 
 extern NSString *NSStringFromCRToastInteractionType(CRToastInteractionType interactionType);
 
 /**
- CRToastInteractionResponder is a container object to configure responses to user interactions with a notification. A collection of interaction responders can be included in the
+ CRToastInteractionResponder is a container object to configure responses to user interactions with a notification. A
+ collection of interaction responders can be included in the
  options for any given notification or in defaults.
  */
 
@@ -51,9 +47,11 @@ extern NSString *NSStringFromCRToastInteractionType(CRToastInteractionType inter
 /**
  Creates an interaction responder for a given interaction type.
  @param interactionType The kind of interaction that will trigger the responder
- @param automaticallyDismiss A BOOL indiciating if the notification should automatically be dismissed on the interaction being observed. If YES the configured notification dismisall
+ @param automaticallyDismiss A BOOL indiciating if the notification should automatically be dismissed on the interaction
+ being observed. If YES the configured notification dismisall
  animation will begin immidiately upon encountering the interaction.
- @param block A block of code to be called immidiately upon the interaction being encountered. The block will be provided the specific CRToastInteractionType that resulted in the
+ @param block A block of code to be called immidiately upon the interaction being encountered. The block will be
+ provided the specific CRToastInteractionType that resulted in the
  block firing
  */
 
@@ -67,28 +65,24 @@ extern NSString *NSStringFromCRToastInteractionType(CRToastInteractionType inter
 ///--------------------
 
 /**
- `CRToastType` defines the height of the notification. `CRToastTypeStatusBar` covers the status bar, `CRToastTypeNavigationBar` covers the status bar
+ `CRToastType` defines the height of the notification. `CRToastTypeStatusBar` covers the status bar,
+ `CRToastTypeNavigationBar` covers the status bar
  and navigation bar
  */
 
-typedef NS_ENUM(NSInteger, CRToastType){
-    CRToastTypeStatusBar,
-    CRToastTypeNavigationBar,
-    CRToastTypeCustom
-};
+typedef NS_ENUM(NSInteger, CRToastType) { CRToastTypeStatusBar, CRToastTypeNavigationBar, CRToastTypeCustom };
 
 /**
- `CRToastPresentationType` defines whether a notification will cover the contents of the status/navigation bar or whether the content will be pushed
+ `CRToastPresentationType` defines whether a notification will cover the contents of the status/navigation bar or
+ whether the content will be pushed
  out by the notification.
  */
 
-typedef NS_ENUM(NSInteger, CRToastPresentationType){
-    CRToastPresentationTypeCover,
-    CRToastPresentationTypePush
-};
+typedef NS_ENUM(NSInteger, CRToastPresentationType) { CRToastPresentationTypeCover, CRToastPresentationTypePush };
 
 /**
- `CRToastAnimationDirection` defines the direction of the notification. A direction can be specified for both notification entrance and exit.
+ `CRToastAnimationDirection` defines the direction of the notification. A direction can be specified for both
+ notification entrance and exit.
  */
 
 typedef NS_ENUM(NSInteger, CRToastAnimationDirection) {
@@ -109,9 +103,9 @@ typedef NS_ENUM(NSInteger, CRToastAnimationType) {
 };
 
 /**
-  `CRToastState` defines the current state of the CRToast. Used for internal state management in the manager 
+  `CRToastState` defines the current state of the CRToast. Used for internal state management in the manager
  */
-typedef NS_ENUM(NSInteger, CRToastState){
+typedef NS_ENUM(NSInteger, CRToastState) {
     CRToastStateWaiting,
     CRToastStateEntering,
     CRToastStateDisplaying,
@@ -122,7 +116,7 @@ typedef NS_ENUM(NSInteger, CRToastState){
 /**
  `CRToastImageAlignment` defines the alignment of the image given to the CRToast.
  */
-typedef NS_ENUM(NSInteger, CRToastAccessoryViewAlignment){
+typedef NS_ENUM(NSInteger, CRToastAccessoryViewAlignment) {
     CRToastAccessoryViewAlignmentLeft,
     CRToastAccessoryViewAlignmentCenter,
     CRToastAccessoryViewAlignmentRight
@@ -143,9 +137,16 @@ typedef NS_ENUM(NSInteger, CRToastAccessoryViewAlignment){
 extern NSString *const kCRToastNotificationTypeKey;
 
 /**
- The preferred height for the notificaiton, this will only be used for notifications with CRToastTypeCustom set for kCRToastNotificationTypeKey
+ The preferred height for the notificaiton, this will only be used for notifications with CRToastTypeCustom set for
+ kCRToastNotificationTypeKey
  */
 extern NSString *const kCRToastNotificationPreferredHeightKey;
+
+/**
+ The preferred top margin for the notificaiton, this will only be used for notifications with CRToastTypeCustom set for
+ kCRToastNotificationTypeKey
+ */
+extern NSString *const kCRToastNotificationPreferredTopMarginKey;
 
 /**
  The presentation type for the notification. Expects type `CRToastPresentationType`.
@@ -202,13 +203,15 @@ extern NSString *const kCRToastAnimationOutTimeIntervalKey;
 extern NSString *const kCRToastAnimationSpringDampingKey;
 
 /**
- The initial velocity coefficient to be used when `kCRToastAnimationInTypeKey` or `kCRToastAnimationOutTypeKey` is set to
+ The initial velocity coefficient to be used when `kCRToastAnimationInTypeKey` or `kCRToastAnimationOutTypeKey` is set
+ to
  `CRToastAnimationTypeSpring`. Currently you can't define initial velocity for in and out. Expects type `CGFloat`.
  */
 extern NSString *const kCRToastAnimationSpringInitialVelocityKey;
 
 /**
- The gravity magnitude coefficient to be used when `kCRToastAnimationInTypeKey` or `kCRToastAnimationOutTypeKey` is set to
+ The gravity magnitude coefficient to be used when `kCRToastAnimationInTypeKey` or `kCRToastAnimationOutTypeKey` is set
+ to
  `CRToastAnimationTypeGravity`. Currently you can't define gravity magnitude for in and out. Expects type `CGFloat`.
  */
 extern NSString *const kCRToastAnimationGravityMagnitudeKey;
@@ -349,7 +352,8 @@ extern NSString *const kCRToastAutorotateKey;
 extern NSString *const kCRToastIdentifierKey;
 
 /**
- A BOOL setting whether the CRToast's should capture the screen behind the default UIWindow. Expects type `BOOL` defaults to `YES`
+ A BOOL setting whether the CRToast's should capture the screen behind the default UIWindow. Expects type `BOOL`
+ defaults to `YES`
  */
 extern NSString *const kCRToastCaptureDefaultWindowKey;
 
@@ -359,21 +363,21 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, strong) NSUUID *uuid;
 @property (nonatomic, assign) CRToastState state;
 
-//Top Level Properties
+// Top Level Properties
 
 @property (nonatomic, strong) NSDictionary *options;
-@property (nonatomic, copy) void(^completion)(void);
-@property (nonatomic, copy) void(^appearance)(void);
+@property (nonatomic, copy) void (^completion)(void);
+@property (nonatomic, copy) void (^appearance)(void);
 
-//Interactions
+// Interactions
 
 @property (nonatomic, strong) NSArray *gestureRecognizers;
 
-//Autorotate
+// Autorotate
 
 @property (nonatomic, assign) BOOL autorotate;
 
-//Views and Layout Data
+// Views and Layout Data
 
 @property (nonatomic, readonly) UIView *notificationView;
 @property (nonatomic, readonly) CGRect notificationViewAnimationFrame1;
@@ -383,10 +387,11 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) CGRect statusBarViewAnimationFrame2;
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 
-//Read Only Convinence Properties Providing Default Values or Values from Options
+// Read Only Convinence Properties Providing Default Values or Values from Options
 
 @property (nonatomic, readonly) CRToastType notificationType;
 @property (nonatomic, assign) CGFloat preferredHeight;
+@property (nonatomic, assign) CGFloat preferredTopMargin;
 @property (nonatomic, readonly) CRToastPresentationType presentationType;
 @property (nonatomic, readonly) BOOL displayUnderStatusBar;
 
@@ -436,8 +441,8 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) CGPoint outCollisionPoint1;
 @property (nonatomic, readonly) CGPoint outCollisionPoint2;
 
-- (void)swipeGestureRecognizerSwiped:(CRToastSwipeGestureRecognizer*)swipeGestureRecognizer;
-- (void)tapGestureRecognizerTapped:(CRToastTapGestureRecognizer*)tapGestureRecognizer;
+- (void)swipeGestureRecognizerSwiped:(CRToastSwipeGestureRecognizer *)swipeGestureRecognizer;
+- (void)tapGestureRecognizerTapped:(CRToastTapGestureRecognizer *)tapGestureRecognizer;
 - (void)initiateAnimator:(UIView *)view;
 
 @end
