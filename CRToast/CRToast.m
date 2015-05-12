@@ -196,6 +196,7 @@ NSString *const kCRToastAnimationSpringInitialVelocityKey = @"kCRToastAnimateSpr
 NSString *const kCRToastAnimationGravityMagnitudeKey = @"kCRToastAnimationGravityMagnitudeKey";
 
 NSString *const kCRToastTextKey = @"kCRToastTextKey";
+NSString *const kCRToastAttributedTextKey = @"kCRToastAttributedTextKey";
 NSString *const kCRToastFontKey = @"kCRToastFontKey";
 NSString *const kCRToastTextColorKey = @"kCRToastTextColorKey";
 NSString *const kCRToastTextAlignmentKey = @"kCRToastTextAlignmentKey";
@@ -251,6 +252,8 @@ static CGFloat kCRSpringInitialVelocityDefault = 1.0;
 static CGFloat kCRGravityMagnitudeDefault = 1.0;
 
 static NSString *kCRTextDefault = @"";
+static NSAttributedString *kCRAttributedTextDefault = nil;
+
 static UIFont *kCRFontDefault = nil;
 static UIColor *kCRTextColorDefault = nil;
 static NSTextAlignment kCRTextAlignmentDefault = NSTextAlignmentCenter;
@@ -325,6 +328,7 @@ static NSDictionary *kCRToastKeyClassMap = nil;
             kCRToastAnimationGravityMagnitudeKey : NSStringFromClass([@(kCRGravityMagnitudeDefault) class]),
 
             kCRToastTextKey : NSStringFromClass([NSString class]),
+            kCRToastAttributedTextKey : NSStringFromClass([NSAttributedString class]),
             kCRToastFontKey : NSStringFromClass([UIFont class]),
             kCRToastTextColorKey : NSStringFromClass([UIColor class]),
             kCRToastTextAlignmentKey : NSStringFromClass([@(kCRTextAlignmentDefault) class]),
@@ -415,6 +419,8 @@ static NSDictionary *kCRToastKeyClassMap = nil;
 
     if (defaultOptions[kCRToastTextKey])
         kCRTextDefault = defaultOptions[kCRToastTextKey];
+    if (defaultOptions[kCRToastAttributedTextKey])
+        kCRTextDefault = defaultOptions[kCRToastAttributedTextKey];
     if (defaultOptions[kCRToastFontKey])
         kCRFontDefault = defaultOptions[kCRToastFontKey];
     if (defaultOptions[kCRToastTextColorKey])
@@ -626,6 +632,11 @@ static NSDictionary *kCRToastKeyClassMap = nil;
 - (NSString *)text {
     return _options[kCRToastTextKey] ?: kCRTextDefault;
 }
+
+- (NSAttributedString *)attributedText {
+    return _options[kCRToastAttributedTextKey] ?: kCRAttributedTextDefault;
+}
+
 
 - (UIFont *)font {
     return _options[kCRToastFontKey] ?: kCRFontDefault;

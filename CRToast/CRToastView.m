@@ -208,24 +208,29 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
 //    _label.shadowOffset = toast.textShadowOffset;
 //    _label.shadowColor = toast.textShadowColor;
     
-    NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
-    paragrahStyle.alignment = toast.textAlignment;
-    [paragrahStyle setLineSpacing:0];
-    [paragrahStyle setMaximumLineHeight:18];
-    
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = toast.textShadowColor;
-    shadow.shadowOffset = toast.textShadowOffset;
-    
-    NSDictionary *attrs = @{
-                            NSFontAttributeName : toast.font,
-                            NSForegroundColorAttributeName : toast.textColor,
-                            NSParagraphStyleAttributeName : paragrahStyle,
-                            NSShadowAttributeName : shadow
-                            };
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:toast.text attributes:attrs];
-    _label.attributedText = attrString;
-
+    NSAttributedString *attributedString = toast.attributedText;
+    if(attributedString){
+        _label.attributedText = attributedString;
+    } else {
+        NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
+        paragrahStyle.alignment = toast.textAlignment;
+        [paragrahStyle setLineSpacing:0];
+        [paragrahStyle setMaximumLineHeight:18];
+        
+        NSShadow *shadow = [[NSShadow alloc] init];
+        shadow.shadowColor = toast.textShadowColor;
+        shadow.shadowOffset = toast.textShadowOffset;
+        
+        NSDictionary *attrs = @{
+                                NSFontAttributeName : toast.font,
+                                NSForegroundColorAttributeName : toast.textColor,
+                                NSParagraphStyleAttributeName : paragrahStyle,
+                                NSShadowAttributeName : shadow
+                                };
+        NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:toast.text attributes:attrs];
+        _label.attributedText = attrString;
+        
+    }
     
     if (toast.subtitleText != nil) {
         _subtitleLabel.text = toast.subtitleText;
